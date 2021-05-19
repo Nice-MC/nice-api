@@ -9,7 +9,7 @@ import java.util.*
 import javax.inject.Singleton
 
 @Singleton
-class PunishDbAdapterImpl(
+open class PunishDbAdapterImpl(
     private val punishRepository: PunishRepository
 ) : PunishDbAdapter {
 

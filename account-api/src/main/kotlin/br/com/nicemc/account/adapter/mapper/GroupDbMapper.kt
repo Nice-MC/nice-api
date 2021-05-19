@@ -7,7 +7,7 @@ fun Group.toDbEntity(): GroupEntity = GroupEntity(
     type = type,
     definedAt = definedAt,
     definedBy = definedBy,
-    isPermanent = isPermanent,
+    permanent = isPermanent,
     expiresIn = expiresIn
 )
 
@@ -15,6 +15,6 @@ fun GroupEntity.toDomainModel(): Group = Group(
     type = type,
     definedAt = definedAt,
     definedBy = definedBy,
-    isPermanent = isPermanent,
+    isPermanent = permanent,
     expiresIn = expiresIn
 )

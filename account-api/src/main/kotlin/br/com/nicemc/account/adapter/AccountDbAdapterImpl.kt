@@ -17,7 +17,7 @@ import javax.inject.Singleton
 import javax.transaction.Transactional
 
 @Singleton
-class AccountDbAdapterImpl(
+open class AccountDbAdapterImpl(
     private val accountRepository: AccountRepository,
     private val statusRepository: StatusRepository,
     private val settingsRepository: SettingsRepository,

@@ -33,7 +33,7 @@ class IntegrationEntity(
 ) {
 
     @field:Id
-    @field:GeneratedValue(strategy = GenerationType.AUTO)
+    @field:GeneratedValue(strategy = GenerationType.SEQUENCE)
     @field:Column(nullable = false, updatable = false, unique = true)
     val id: Long? = null
 

@@ -22,23 +22,23 @@ class AccountEntity(
 ) {
 
     @field:Id
-    @field:GeneratedValue(strategy = GenerationType.AUTO)
+    @field:GeneratedValue(strategy = GenerationType.SEQUENCE)
     @field:Column(unique = true, updatable = false, nullable = false)
     val id: Long? = null
 
-    @field:OneToOne
+    @field:OneToOne(cascade = [CascadeType.ALL])
     var status: StatusEntity? = null
 
-    @field:OneToOne
+    @field:OneToOne(cascade = [CascadeType.ALL])
     var settings: SettingsEntity? = null
 
-    @field:OneToOne
+    @field:OneToOne(cascade = [CascadeType.ALL])
     var group: GroupEntity? = null
 
-    @field:OneToMany(fetch = FetchType.LAZY)
+    @field:OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var integrations: Set<IntegrationEntity>? = null
 
-    @field:OneToMany(fetch = FetchType.LAZY)
+    @field:OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var punishes: Set<PunishEntity>? = null
 
 }

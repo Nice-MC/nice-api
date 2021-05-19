@@ -37,6 +37,8 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    testRuntimeOnly("com.h2database:h2")
+    kaptTest("io.micronaut:micronaut-inject-java")
 
     //Model validation
     implementation("io.konform:konform:0.3.0")

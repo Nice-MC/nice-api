@@ -9,7 +9,7 @@ import java.util.*
 import javax.inject.Singleton
 
 @Singleton
-class IntegrationDbAdapterImpl(
+open class IntegrationDbAdapterImpl(
     private val integrationRepository: IntegrationRepository
 ) : IntegrationDbAdapter {
 

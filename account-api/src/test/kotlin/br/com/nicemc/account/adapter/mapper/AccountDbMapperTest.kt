@@ -64,7 +64,7 @@ internal class AccountDbMapperTest : EntityMapperTest {
                 type = GroupType.MEMBER,
                 definedAt = LocalDateTime.now(),
                 definedBy = "Steve",
-                isPermanent = true,
+                permanent = true,
                 expiresIn = null
             )
         }

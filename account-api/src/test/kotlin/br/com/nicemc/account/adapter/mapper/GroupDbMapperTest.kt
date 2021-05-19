@@ -20,7 +20,7 @@ internal class GroupDbMapperTest : EntityMapperTest {
                 assertEquals(type, GroupType.MEMBER)
                 assertEquals(definedAt, group.definedAt)
                 assertEquals(definedBy, "CONSOLE")
-                assertEquals(isPermanent, true)
+                assertEquals(permanent, true)
                 assertEquals(expiresIn, null)
             })
         }
@@ -32,7 +32,7 @@ internal class GroupDbMapperTest : EntityMapperTest {
             type = GroupType.MEMBER,
             definedAt = LocalDateTime.now(),
             definedBy = "CONSOLE",
-            isPermanent = true,
+            permanent = true,
             expiresIn = null
         )
 

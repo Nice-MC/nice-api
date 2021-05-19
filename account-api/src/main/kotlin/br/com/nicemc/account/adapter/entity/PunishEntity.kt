@@ -47,7 +47,7 @@ class PunishEntity(
 ) {
 
     @field:Id
-    @field:GeneratedValue(strategy = GenerationType.AUTO)
+    @field:GeneratedValue(strategy = GenerationType.SEQUENCE)
     @field:Column(unique = true, updatable = false, nullable = false)
     val id: Long? = null
 

@@ -20,7 +20,7 @@ class StatusEntity(
 ) {
 
     @field:Id
-    @field:GeneratedValue(strategy = GenerationType.AUTO)
+    @field:GeneratedValue(strategy = GenerationType.SEQUENCE)
     @field:Column(updatable = false, unique = true)
     val id: Long? = null
 
