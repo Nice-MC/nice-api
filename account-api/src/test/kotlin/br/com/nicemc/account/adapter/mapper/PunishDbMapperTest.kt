@@ -1,11 +1,9 @@
 package br.com.nicemc.account.adapter.mapper
 
-import br.com.nicemc.account.adapter.entity.AccountEntity
 import br.com.nicemc.account.adapter.entity.PunishEntity
 import br.com.nicemc.account.domain.enums.PunishType
 import br.com.nicemc.account.domain.model.Account
 import br.com.nicemc.account.domain.model.Punish
-import br.com.nicemc.account.domain.model.Status
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
@@ -30,7 +28,7 @@ internal class PunishDbMapperTest : EntityMapperTest {
             removedAt = null
         )
 
-        val dbEntity = punish.toDbEntity()
+        val dbEntity = PunishDbMapper.mapToEntity(punish)
 
         with(dbEntity) {
             assertAll({
@@ -53,7 +51,7 @@ internal class PunishDbMapperTest : EntityMapperTest {
     override fun `should return a domain model`() {
         val punishEntity = PunishEntity(
             punishId = UUID.randomUUID(),
-            account = Account(UUID.randomUUID(), "Notch").toDbEntity(),
+            account = AccountDbMapper.mapToEntity(Account(UUID.randomUUID(), "Notch")),
             type = PunishType.BAN,
             reason = "cheating",
             punishedBy = UUID.randomUUID(),
@@ -65,7 +63,7 @@ internal class PunishDbMapperTest : EntityMapperTest {
             removedAt = null
         )
 
-        val domain = punishEntity.toDomainModel()
+        val domain = PunishDbMapper.mapToModel(punishEntity)
 
         with(domain) {
             assertAll({

@@ -13,7 +13,7 @@ internal class GroupDbMapperTest : EntityMapperTest {
     override fun `should return a db entity`() {
         val group = Group()
 
-        val dbEntity = group.toDbEntity()
+        val dbEntity = GroupDbMapper.mapToEntity(group)
 
         with(dbEntity) {
             assertAll({
@@ -36,7 +36,7 @@ internal class GroupDbMapperTest : EntityMapperTest {
             expiresIn = null
         )
 
-        val domain = groupEntity.toDomainModel()
+        val domain = GroupDbMapper.mapToModel(groupEntity)
 
         with(domain) {
             assertAll({

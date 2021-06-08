@@ -16,7 +16,7 @@ internal class StatusDbMapperTest : EntityMapperTest {
             cashValue = 360
         )
 
-        val dbEntity = status.toDbEntity()
+        val dbEntity = StatusDbMapper.mapToEntity(status)
 
         with(dbEntity) {
             assertAll({
@@ -35,7 +35,7 @@ internal class StatusDbMapperTest : EntityMapperTest {
             cashValue = 6161.0.toBigDecimal()
         )
 
-        val domain = statusEntity.toDomainModel()
+        val domain = StatusDbMapper.mapToModel(statusEntity)
 
         with(domain) {
             assertAll({

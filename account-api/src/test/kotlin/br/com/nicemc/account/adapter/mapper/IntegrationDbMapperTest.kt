@@ -9,7 +9,7 @@ import org.junit.jupiter.api.assertAll
 import java.time.LocalDateTime
 import java.util.*
 
-internal class IntegrationDbMapper : EntityMapperTest {
+internal class IntegrationDbMapperTest : EntityMapperTest {
 
     @Test
     override fun `should return a db entity`() {
@@ -23,7 +23,7 @@ internal class IntegrationDbMapper : EntityMapperTest {
             confirmedAt = null
         )
 
-        val dbEntity = integration.toDbEntity()
+        val dbEntity = IntegrationDbMapper.mapToEntity(integration)
 
         with(dbEntity) {
             assertAll({
@@ -42,7 +42,7 @@ internal class IntegrationDbMapper : EntityMapperTest {
     override fun `should return a domain model`() {
         val integrationEntity = IntegrationEntity(
             integrationId = UUID.randomUUID(),
-            account = Account(UUID.randomUUID(), "Notch").toDbEntity(),
+            account = AccountDbMapper.mapToEntity(Account(UUID.randomUUID(), "Notch")),
             name = "email",
             value = "test_mail@test.com",
             integratedAt = LocalDateTime.now(),
@@ -50,7 +50,7 @@ internal class IntegrationDbMapper : EntityMapperTest {
             confirmedAt = null
         )
 
-        val domain = integrationEntity.toDomainModel()
+        val domain = IntegrationDbMapper.mapToModel(integrationEntity)
 
         with(domain) {
             assertAll({

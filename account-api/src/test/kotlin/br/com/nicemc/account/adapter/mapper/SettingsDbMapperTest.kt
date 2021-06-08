@@ -18,7 +18,7 @@ internal class SettingsDbMapperTest : EntityMapperTest {
             language = Language.PORTUGUESE
         )
 
-        val dbEntity = settings.toDbEntity()
+        val dbEntity = SettingsDbMapper.mapToEntity(settings)
 
         with(dbEntity) {
             assertAll({
@@ -39,7 +39,7 @@ internal class SettingsDbMapperTest : EntityMapperTest {
             language = Language.PORTUGUESE
         )
 
-        val domain = settingEntity.toDomainModel()
+        val domain = SettingsDbMapper.mapToModel(settingEntity)
 
         with(domain) {
             assertAll({

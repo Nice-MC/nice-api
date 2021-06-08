@@ -28,7 +28,7 @@ internal class AccountDbMapperTest : EntityMapperTest {
             group = Group()
         )
 
-        val dbEntity = account.toDbEntity()
+        val dbEntity = AccountDbMapper.mapToEntity(account)
 
         with(dbEntity) {
             assertAll({
@@ -69,7 +69,7 @@ internal class AccountDbMapperTest : EntityMapperTest {
             )
         }
 
-        val domain = account.toDomainModel()
+        val domain = AccountDbMapper.mapToModel(account)
 
         with(domain) {
             assertAll({
