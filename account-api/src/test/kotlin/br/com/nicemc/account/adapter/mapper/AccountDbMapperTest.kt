@@ -18,8 +18,8 @@ import java.util.*
 internal class AccountDbMapperTest : EntityMapperTest {
 
     @Test
-    override fun `should return a db entity`() {
-        val account = Account(
+    override fun `should return a entity`() {
+        val model = Account(
             accountId = UUID.randomUUID(),
             playerName = "Notch",
             createdAt = LocalDateTime.now(),
@@ -28,13 +28,13 @@ internal class AccountDbMapperTest : EntityMapperTest {
             group = Group()
         )
 
-        val dbEntity = AccountDbMapper.mapToEntity(account)
+        val entity = AccountDbMapper.mapToEntity(model)
 
-        with(dbEntity) {
+        with(entity) {
             assertAll({
-                assertEquals(playerUniqueId, account.accountId)
-                assertEquals(playerName, account.playerName)
-                assertEquals(createdAt, account.createdAt)
+                assertEquals(playerUniqueId, model.accountId)
+                assertEquals(playerName, model.playerName)
+                assertEquals(createdAt, model.createdAt)
 
                 assertNotNull(status)
                 assertNotNull(settings)
@@ -47,8 +47,8 @@ internal class AccountDbMapperTest : EntityMapperTest {
     }
 
     @Test
-    override fun `should return a domain model`() {
-        val account = AccountEntity(
+    override fun `should return a model`() {
+        val entity = AccountEntity(
             playerUniqueId = UUID.randomUUID(),
             playerName = "Notch",
             createdAt = LocalDateTime.now(),
@@ -69,17 +69,18 @@ internal class AccountDbMapperTest : EntityMapperTest {
             )
         }
 
-        val domain = AccountDbMapper.mapToModel(account)
+        val model = AccountDbMapper.mapToModel(entity)
 
-        with(domain) {
+        with(model) {
             assertAll({
-                assertEquals(accountId, account.playerUniqueId)
-                assertEquals(playerName, account.playerName)
-                assertEquals(createdAt, account.createdAt)
+                assertEquals(accountId, entity.playerUniqueId)
+                assertEquals(playerName, entity.playerName)
+                assertEquals(createdAt, entity.createdAt)
                 assertNotNull(status)
                 assertNotNull(settings)
                 assertNotNull(group)
             })
         }
     }
+
 }

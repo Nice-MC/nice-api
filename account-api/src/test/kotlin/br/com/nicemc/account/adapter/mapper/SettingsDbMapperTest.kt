@@ -10,43 +10,43 @@ import org.junit.jupiter.api.assertAll
 internal class SettingsDbMapperTest : EntityMapperTest {
 
     @Test
-    override fun `should return a db entity`() {
-        val settings = Settings(
+    override fun `should return a entity`() {
+        val model = Settings(
             receivePrivateMessages = true,
             receiveChatMessages = true,
             receiveAlerts = true,
             language = Language.PORTUGUESE
         )
 
-        val dbEntity = SettingsDbMapper.mapToEntity(settings)
+        val entity = SettingsDbMapper.mapToEntity(model)
 
-        with(dbEntity) {
+        with(entity) {
             assertAll({
-                assertEquals(receivePrivateMessages, settings.receivePrivateMessages)
-                assertEquals(receiveChatMessages, settings.receiveChatMessages)
-                assertEquals(receiveAlerts, settings.receiveAlerts)
-                assertEquals(language, settings.language)
+                assertEquals(receivePrivateMessages, model.receivePrivateMessages)
+                assertEquals(receiveChatMessages, model.receiveChatMessages)
+                assertEquals(receiveAlerts, model.receiveAlerts)
+                assertEquals(language, model.language)
             })
         }
     }
 
     @Test
-    override fun `should return a domain model`() {
-        val settingEntity = SettingsEntity(
+    override fun `should return a model`() {
+        val entity = SettingsEntity(
             receivePrivateMessages = true,
             receiveChatMessages = true,
             receiveAlerts = true,
             language = Language.PORTUGUESE
         )
 
-        val domain = SettingsDbMapper.mapToModel(settingEntity)
+        val model = SettingsDbMapper.mapToModel(entity)
 
-        with(domain) {
+        with(model) {
             assertAll({
-                assertEquals(receivePrivateMessages, settingEntity.receivePrivateMessages)
-                assertEquals(receiveChatMessages, settingEntity.receiveChatMessages)
-                assertEquals(receiveAlerts, settingEntity.receiveAlerts)
-                assertEquals(language, settingEntity.language)
+                assertEquals(receivePrivateMessages, entity.receivePrivateMessages)
+                assertEquals(receiveChatMessages, entity.receiveChatMessages)
+                assertEquals(receiveAlerts, entity.receiveAlerts)
+                assertEquals(language, entity.language)
             })
         }
     }

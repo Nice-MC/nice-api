@@ -10,15 +10,15 @@ import java.time.LocalDateTime
 internal class GroupDbMapperTest : EntityMapperTest {
 
     @Test
-    override fun `should return a db entity`() {
-        val group = Group()
+    override fun `should return a entity`() {
+        val model = Group()
 
-        val dbEntity = GroupDbMapper.mapToEntity(group)
+        val entity = GroupDbMapper.mapToEntity(model)
 
-        with(dbEntity) {
+        with(entity) {
             assertAll({
                 assertEquals(type, GroupType.MEMBER)
-                assertEquals(definedAt, group.definedAt)
+                assertEquals(definedAt, model.definedAt)
                 assertEquals(definedBy, "CONSOLE")
                 assertEquals(permanent, true)
                 assertEquals(expiresIn, null)
@@ -27,8 +27,8 @@ internal class GroupDbMapperTest : EntityMapperTest {
     }
 
     @Test
-    override fun `should return a domain model`() {
-        val groupEntity = GroupEntity(
+    override fun `should return a model`() {
+        val entity = GroupEntity(
             type = GroupType.MEMBER,
             definedAt = LocalDateTime.now(),
             definedBy = "CONSOLE",
@@ -36,12 +36,12 @@ internal class GroupDbMapperTest : EntityMapperTest {
             expiresIn = null
         )
 
-        val domain = GroupDbMapper.mapToModel(groupEntity)
+        val model = GroupDbMapper.mapToModel(entity)
 
-        with(domain) {
+        with(model) {
             assertAll({
                 assertEquals(type, GroupType.MEMBER)
-                assertEquals(definedAt, groupEntity.definedAt)
+                assertEquals(definedAt, entity.definedAt)
                 assertEquals(definedBy, "CONSOLE")
                 assertEquals(isPermanent, true)
                 assertEquals(expiresIn, null)

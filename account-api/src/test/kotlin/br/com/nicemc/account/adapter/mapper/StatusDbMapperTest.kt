@@ -9,39 +9,39 @@ import org.junit.jupiter.api.assertAll
 internal class StatusDbMapperTest : EntityMapperTest {
 
     @Test
-    override fun `should return a db entity`() {
-        val status = Status(
+    override fun `should return a entity`() {
+        val model = Status(
             xpValue = 150,
             coinsValue = 270,
             cashValue = 360
         )
 
-        val dbEntity = StatusDbMapper.mapToEntity(status)
+        val entity = StatusDbMapper.mapToEntity(model)
 
-        with(dbEntity) {
+        with(entity) {
             assertAll({
-                assertEquals(xpValue.intValueExact(), status.xp.value)
-                assertEquals(coinsValue.intValueExact(), status.coins.value)
-                assertEquals(cashValue.intValueExact(), status.cash.value)
+                assertEquals(xpValue.intValueExact(), model.xp.value)
+                assertEquals(coinsValue.intValueExact(), model.coins.value)
+                assertEquals(cashValue.intValueExact(), model.cash.value)
             })
         }
     }
 
     @Test
-    override fun `should return a domain model`() {
-        val statusEntity = StatusEntity(
+    override fun `should return a model`() {
+        val entity = StatusEntity(
             xpValue = 1312.0.toBigDecimal(),
             coinsValue = 151.0.toBigDecimal(),
             cashValue = 6161.0.toBigDecimal()
         )
 
-        val domain = StatusDbMapper.mapToModel(statusEntity)
+        val model = StatusDbMapper.mapToModel(entity)
 
-        with(domain) {
+        with(model) {
             assertAll({
-                assertEquals(xp.value, statusEntity.xpValue.intValueExact())
-                assertEquals(coins.value, statusEntity.coinsValue.intValueExact())
-                assertEquals(cash.value, statusEntity.cashValue.intValueExact())
+                assertEquals(xp.value, entity.xpValue.intValueExact())
+                assertEquals(coins.value, entity.coinsValue.intValueExact())
+                assertEquals(cash.value, entity.cashValue.intValueExact())
             })
         }
     }

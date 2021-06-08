@@ -12,8 +12,8 @@ import java.util.*
 internal class IntegrationDbMapperTest : EntityMapperTest {
 
     @Test
-    override fun `should return a db entity`() {
-        val integration = Integration(
+    override fun `should return a entity`() {
+        val model = Integration(
             integrationId = UUID.randomUUID(),
             account = Account(UUID.randomUUID(), "Notch"),
             name = "email",
@@ -23,24 +23,24 @@ internal class IntegrationDbMapperTest : EntityMapperTest {
             confirmedAt = null
         )
 
-        val dbEntity = IntegrationDbMapper.mapToEntity(integration)
+        val entity = IntegrationDbMapper.mapToEntity(model)
 
-        with(dbEntity) {
+        with(entity) {
             assertAll({
-                assertEquals(integrationId, integration.integrationId)
-                assertEquals(account.playerName, integration.account.playerName)
-                assertEquals(name, integration.name)
-                assertEquals(value, integration.value)
-                assertEquals(integratedAt, integration.integratedAt)
-                assertEquals(confirm, integration.isConfirmed())
-                assertEquals(confirmedAt, integration.getConfirmDate())
+                assertEquals(integrationId, model.integrationId)
+                assertEquals(account.playerName, model.account.playerName)
+                assertEquals(name, model.name)
+                assertEquals(value, model.value)
+                assertEquals(integratedAt, model.integratedAt)
+                assertEquals(confirm, model.isConfirmed())
+                assertEquals(confirmedAt, model.getConfirmDate())
             })
         }
     }
 
     @Test
-    override fun `should return a domain model`() {
-        val integrationEntity = IntegrationEntity(
+    override fun `should return a model`() {
+        val entity = IntegrationEntity(
             integrationId = UUID.randomUUID(),
             account = AccountDbMapper.mapToEntity(Account(UUID.randomUUID(), "Notch")),
             name = "email",
@@ -50,18 +50,19 @@ internal class IntegrationDbMapperTest : EntityMapperTest {
             confirmedAt = null
         )
 
-        val domain = IntegrationDbMapper.mapToModel(integrationEntity)
+        val model = IntegrationDbMapper.mapToModel(entity)
 
-        with(domain) {
+        with(model) {
             assertAll({
-                assertEquals(integrationId, integrationEntity.integrationId)
-                assertEquals(account.playerName, integrationEntity.account.playerName)
-                assertEquals(name, integrationEntity.name)
-                assertEquals(value, integrationEntity.value)
-                assertEquals(integratedAt, integrationEntity.integratedAt)
-                assertEquals(isConfirmed(), integrationEntity.confirm)
-                assertEquals(getConfirmDate(), integrationEntity.confirmedAt)
+                assertEquals(integrationId, entity.integrationId)
+                assertEquals(account.playerName, entity.account.playerName)
+                assertEquals(name, entity.name)
+                assertEquals(value, entity.value)
+                assertEquals(integratedAt, entity.integratedAt)
+                assertEquals(isConfirmed(), entity.confirm)
+                assertEquals(getConfirmDate(), entity.confirmedAt)
             })
         }
     }
+
 }
