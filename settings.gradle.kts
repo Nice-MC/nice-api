@@ -1,2 +1,2 @@
-rootProject.name = "nice-hg"
+rootProject.name = "nice-api"
 include("account-api")

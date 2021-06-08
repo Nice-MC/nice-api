@@ -1,7 +1,6 @@
 package br.com.nicemc.account.adapter
 
-import br.com.nicemc.account.adapter.mapper.toDbEntity
-import br.com.nicemc.account.adapter.mapper.toDomainModel
+import br.com.nicemc.account.adapter.mapper.AccountDbMapper
 import br.com.nicemc.account.adapter.persistence.AccountRepository
 import br.com.nicemc.account.adapter.persistence.GroupRepository
 import br.com.nicemc.account.adapter.persistence.SettingsRepository
@@ -25,16 +24,16 @@ open class AccountDbAdapterImpl(
 ) : AccountDbAdapter {
 
     override fun findById(id: UUID): Optional<Account> {
-        return accountRepository.findByPlayerUniqueId(id).map { it.toDomainModel() }
+        return accountRepository.findByPlayerUniqueId(id).map { AccountDbMapper.mapToModel(it) }
     }
 
     override fun findAll(): List<Account> {
-        return accountRepository.findAll().map { it.toDomainModel() }
+        return accountRepository.findAll().map { AccountDbMapper.mapToModel(it) }
     }
 
     override fun create(account: Account): Account {
-        val dbEntity = account.toDbEntity()
-        return accountRepository.save(dbEntity).toDomainModel()
+        val dbEntity = AccountDbMapper.mapToEntity(account)
+        return AccountDbMapper.mapToModel(accountRepository.save(dbEntity))
     }
 
     @Transactional
@@ -63,4 +62,5 @@ open class AccountDbAdapterImpl(
         groupRepository.update(persistedAccount.group ?: throw AccountGroupNotFoundException())
         return account
     }
+
 }

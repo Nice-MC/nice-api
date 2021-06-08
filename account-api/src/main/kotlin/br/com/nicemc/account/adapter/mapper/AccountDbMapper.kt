@@ -3,31 +3,34 @@ package br.com.nicemc.account.adapter.mapper
 import br.com.nicemc.account.adapter.entity.AccountEntity
 import br.com.nicemc.account.domain.model.Account
 
-fun Account.toDbEntity(): AccountEntity = AccountEntity(
-    playerUniqueId = accountId,
-    playerName = playerName,
-    createdAt = createdAt
-).let {
-    it.status = this.status.toDbEntity()
-    it.settings = this.settings.toDbEntity()
-    it.group = this.group.toDbEntity()
-    it.integrations = this.getIntegrations().map { integration -> integration.toDbEntity() }.toSet()
-    it.punishes = this.getPunishes().map { punish -> punish.toDbEntity() }.toSet()
-    it
-}
+object AccountDbMapper : Mapper<Account, AccountEntity> {
 
-fun AccountEntity.toDomainModel(): Account = Account(
-    accountId = playerUniqueId,
-    playerName = playerName,
-    createdAt = createdAt,
-    status = status!!.toDomainModel(),
-    settings = settings!!.toDomainModel(),
-    group = group!!.toDomainModel()
-).apply {
-    if (!integrations.isNullOrEmpty()) {
-        addAllIntegrations(integrations!!.map { it.toDomainModel() }.toSet())
+    override fun mapToEntity(model: Account) = AccountEntity(
+        playerUniqueId = model.accountId,
+        playerName = model.playerName,
+        createdAt = model.createdAt
+    ).apply {
+        status = StatusDbMapper.mapToEntity(model.status)
+        settings = SettingsDbMapper.mapToEntity(model.settings)
+        group = GroupDbMapper.mapToEntity(model.group)
+        integrations = model.getIntegrations().map { integration -> IntegrationDbMapper.mapToEntity(integration) }.toSet()
+        punishes = model.getPunishes().map { punish -> PunishDbMapper.mapToEntity(punish) }.toSet()
     }
-    if (!punishes.isNullOrEmpty()) {
-        addAllPunishes(punishes!!.map { it.toDomainModel() }.toSet())
+
+    override fun mapToModel(entity: AccountEntity) = Account(
+        accountId = entity.playerUniqueId,
+        playerName = entity.playerName,
+        createdAt = entity.createdAt,
+        status = StatusDbMapper.mapToModel(entity.status!!),
+        settings = SettingsDbMapper.mapToModel(entity.settings!!),
+        group = GroupDbMapper.mapToModel(entity.group!!)
+    ).apply {
+        if (!entity.integrations.isNullOrEmpty()) {
+            addAllIntegrations(entity.integrations!!.map { IntegrationDbMapper.mapToModel(it) }.toSet())
+        }
+        if (!entity.punishes.isNullOrEmpty()) {
+            addAllPunishes(entity.punishes!!.map { PunishDbMapper.mapToModel(it) }.toSet())
+        }
     }
+
 }
